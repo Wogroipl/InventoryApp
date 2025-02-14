@@ -1,0 +1,28 @@
+﻿@page "/"
+@inject HomeViewModel ViewModel
+
+<h1>Home</h1>
+@if (ViewModel.FilteredJobs is null)
+{
+	<p><em>Loading...</em></p>
+}
+
+else if (!ViewModel.FilteredJobs.Any())
+{
+	<p><em>No jobs found</em></p>
+}
+else
+{
+	<FluentDataGrid Items="@ViewModel.FilteredJobs"	AutoFit="true">
+		<PropertyColumn Property="@(j => j.Name)"Sortable="true"/>
+		<PropertyColumn Property="@(j => j.Loadin)" Format="dd-MM" Sortable="true" />
+		<PropertyColumn Property="@(j => j.Loadout)" Format="dd-MM" Sortable="true" />
+		<PropertyColumn Property="@(j => j.Customer.Name)" Title="Customer" Sortable="true"/>
+		<PropertyColumn Property="@(j => j.Venue.Name)" Title ="Venue" Sortable="true"/>
+	</FluentDataGrid>
+}
+
+@code {
+	protected override async Task OnInitializedAsync() => await ViewModel.LoadJobsAsync();
+
+    }
