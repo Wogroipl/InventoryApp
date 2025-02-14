@@ -2,6 +2,7 @@
 @inject HomeViewModel ViewModel
 
 <h1>Home</h1>
+<FluentSearch Placeholder="Search jobs" @bind-Value="ViewModel.SearchText" @bind-Value:after="ViewModel.FilterJobs" Immediate="true" />
 @if (ViewModel.FilteredJobs is null)
 {
 	<p><em>Loading...</em></p>
@@ -13,12 +14,18 @@ else if (!ViewModel.FilteredJobs.Any())
 }
 else
 {
-	<FluentDataGrid Items="@ViewModel.FilteredJobs"	AutoFit="true">
-		<PropertyColumn Property="@(j => j.Name)"Sortable="true"/>
-		<PropertyColumn Property="@(j => j.Loadin)" Format="dd-MM" Sortable="true" />
-		<PropertyColumn Property="@(j => j.Loadout)" Format="dd-MM" Sortable="true" />
-		<PropertyColumn Property="@(j => j.Customer.Name)" Title="Customer" Sortable="true"/>
-		<PropertyColumn Property="@(j => j.Venue.Name)" Title ="Venue" Sortable="true"/>
+	<FluentDataGrid Items="@ViewModel.FilteredJobs" RowSize="DataGridRowSize.Medium">
+		<PropertyColumn Property="@(j => j.Name)"Sortable="true" Width="50%"/>
+		<PropertyColumn Property="@(j => j.Loadin)" Format="dd-MM" Sortable="true" Width="1fr" IsDefaultSortColumn="true" />
+		<PropertyColumn Property="@(j => j.Loadout)" Format="dd-MM" Sortable="true" Width="1fr" />
+		<PropertyColumn Property="@(j => j.Customer.Name)" Title="Customer" Sortable="true" Width="1fr" />
+		<PropertyColumn Property="@(j => j.Venue.Name)" Title="Venue" Sortable="true" Width="1fr" />
+		<TemplateColumn Width="1fr" Style="align-items">
+			<FluentButton IconStart="new Icons.Regular.Size20.Edit()" Appearance="Appearance.Accent"/>
+			<FluentButton IconStart="new Icons.Regular.Size20.Delete()" Appearance="Appearance.Accent"/>
+			<FluentButton IconStart="new Icons.Regular.Size20.Print()" Appearance="Appearance.Accent" />
+		</TemplateColumn>
+
 	</FluentDataGrid>
 }
 

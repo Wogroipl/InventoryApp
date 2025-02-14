@@ -22,6 +22,32 @@ public class HomeViewModel : ViewModelbase
         }
     }
 
+    private DateTime _startDate = DateTime.Today;
+
+    public DateTime StartDate
+    {
+        get => _startDate;
+        set
+        {
+            _startDate = value;
+            OnPropertyChanged(nameof(StartDate));
+        }
+    }
+
+    private DateTime _endDate = DateTime.Today.AddDays(30);
+
+    public DateTime EndDate
+    {
+        get { return _endDate; }
+        set
+        {
+            _endDate = value;
+            OnPropertyChanged(nameof(EndDate));
+        }
+    }
+
+
+
 
     public HomeViewModel(DataService<Job> dataService)
     {

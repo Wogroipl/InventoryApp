@@ -10,7 +10,7 @@ a, .btn-link {
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
-    border-color: #1861ac;
+    border-color: #eee22f;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -36,6 +36,10 @@ h1:focus {
 
 .validation-message {
     color: #e50000;
+}
+
+.global-color {
+   accent-color: #006400;
 }
 
 #blazor-error-ui {
