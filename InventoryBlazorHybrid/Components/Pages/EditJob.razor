@@ -1,0 +1,22 @@
+﻿@page "/job/{jobId:guid}"
+@inject JobViewModel ViewModel
+
+<FluentTextField @bind-Value=ViewModel.CurrentJob.Name Label="Naam"></FluentTextField>
+<FluentTextField @bind-Value=ViewModel.CurrentJob.Customer.Name Label="CustomerName"></FluentTextField>
+<FluentTextField @bind-Value=ViewModel.CurrentJob.Venue.Name Label="VenueName"></FluentTextField>
+
+<FluentDataGrid Items="@(ViewModel.Transactions)" RowSize="DataGridRowSize.Medium">
+    <PropertyColumn Property="@(t => t.Product.Name)" Title="Product Name" Sortable="true" Width="1fr" />
+    <PropertyColumn Property="@(t => t.Quantity)" Title="Quantity" Sortable="true" Width="1fr" />
+    <TemplateColumn Width="1fr" Context="Transaction">
+        <FluentButton IconStart="new Icons.Regular.Size20.Delete()" Appearance="Appearance.Accent" @onclick="() => DeleteTransaction(Transaction.Id)" />
+    </TemplateColumn>
+</FluentDataGrid>
+
+@code {
+	[Parameter]
+	public Guid JobId { get; set; }
+	protected override async Task OnInitializedAsync() => await ViewModel.LoadJobAsync(JobId);
+    private async Task DeleteTransaction(Guid transactionId) => await ViewModel.DeleteTransactionAsync(transactionId);
+
+}

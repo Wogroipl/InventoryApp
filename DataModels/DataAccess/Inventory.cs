@@ -2,14 +2,23 @@
 
 namespace Repository.DataAccess;
 
+// Inventory class to hold all the data, temporary solution until we implement a database
 public class Inventory
 {
+    //profucts table
     public List<Product> Products { get; set; }
+    //customers table
     public List<Customer> Customers { get; set; }
+    //venues table
     public List<Venue> Venues { get; set; }
+    //jobs table
     public List<Job> Jobs { get; set; }
+    //transactions table
     public List<Transaction> Transactions { get; set; }
 
+    /// <summary>
+    /// Constructor to initialize the Inventory with some data
+    /// </summary>
     public Inventory()
     {
         Products =

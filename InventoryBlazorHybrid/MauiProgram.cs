@@ -18,16 +18,19 @@ namespace InventoryBlazorHybrid
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
-
+            // Register the services
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddFluentUIComponents();
             builder.Services.AddDataGridEntityFrameworkAdapter();
 
-
+            // Register the view models
             builder.Services.AddSingleton<HomeViewModel>();
+            builder.Services.AddSingleton<JobViewModel>();
 
+            // Register single instance of the inventory
             builder.Services.AddSingleton<Inventory>();
 
+            // Register the data services
             builder.Services.AddTransient<DataService<Job>>();
             builder.Services.AddTransient<DataService<Customer>>();
             builder.Services.AddTransient<DataService<Venue>>();

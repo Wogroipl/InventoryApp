@@ -1,0 +1,9 @@
+﻿@page "/job"
+@inject JobViewModel ViewModel
+
+<FluentTextField @bind-Value=ViewModel.CurrentJob.Name Label="Naam"></FluentTextField>
+<FluentTextField @bind-Value=ViewModel.CurrentJob.Customer.Name Label="CustomerName"></FluentTextField>
+<FluentTextField @bind-Value=ViewModel.CurrentJob.Venue.Name Label="VenueName"></FluentTextField>
+
+@code {
+}
