@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using InventoryBlazorHybrid.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.FluentUI.AspNetCore.Components;
-using Repository.DataAccess;
-using Repository.Models;
-using Repository.ViewModels;
 
 namespace InventoryBlazorHybrid
 {
@@ -11,6 +11,13 @@ namespace InventoryBlazorHybrid
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
+            // Add configuration
+            builder.Configuration
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: false)
+                .AddUserSecrets<MauiApp>(optional: true, reloadOnChange: true);
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
@@ -18,24 +25,16 @@ namespace InventoryBlazorHybrid
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
+            //Add DBContext
+            builder.Services.AddDbContext<InventoryDbContext>(options =>
+                                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
             // Register the services
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddFluentUIComponents();
             builder.Services.AddDataGridEntityFrameworkAdapter();
 
-            // Register the view models
-            builder.Services.AddSingleton<HomeViewModel>();
-            builder.Services.AddSingleton<JobViewModel>();
-
-            // Register single instance of the inventory
-            builder.Services.AddSingleton<Inventory>();
-
-            // Register the data services
-            builder.Services.AddTransient<DataService<Job>>();
-            builder.Services.AddTransient<DataService<Customer>>();
-            builder.Services.AddTransient<DataService<Venue>>();
-            builder.Services.AddTransient<DataService<Product>>();
-            builder.Services.AddTransient<DataService<Transaction>>();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

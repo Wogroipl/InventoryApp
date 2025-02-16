@@ -4,7 +4,6 @@ namespace Repository.Models;
 
 public class Job : ModelBase
 {
-    public Guid Id { get; set; } = Guid.Empty;
     public string Name { get; set; } = string.Empty;
     public DateTime Loadin { get; set; }
     public DateTime Loadout { get; set; }
