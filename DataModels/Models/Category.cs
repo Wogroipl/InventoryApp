@@ -1,6 +1,8 @@
-﻿namespace Repository.Models;
+﻿using Repository.Core;
 
-public class Category
+namespace Repository.Models;
+
+public class Category : ModelBase
 {
     public string Name { get; set; } = string.Empty;
 
