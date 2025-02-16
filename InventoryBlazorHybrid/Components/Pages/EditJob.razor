@@ -1,9 +1,8 @@
-﻿@page "/job"
-@* /{jobId:guid?}" *@
+﻿@page "/job/{JobId:guid?}"
 
 <h1>Edit Job</h1>
 
-@* <FluentTextField @bind-Value=CurrentJob.Name Label="Naam"></FluentTextField>
+<FluentTextField @bind-Value=CurrentJob.Name Label="Naam"></FluentTextField>
 <FluentTextField @bind-Value=CurrentJob.Customer.Name Label="CustomerName"></FluentTextField>
 <FluentTextField @bind-Value=CurrentJob.Venue.Name Label="VenueName"></FluentTextField>
 
@@ -13,4 +12,4 @@
     <TemplateColumn Width="1fr" Context="Transaction">
         <FluentButton IconStart="new Icons.Regular.Size20.Delete()" Appearance="Appearance.Accent" @onclick="() => DeleteTransaction(Transaction.Id)" />
     </TemplateColumn>
-</FluentDataGrid> *@
+</FluentDataGrid>

@@ -15,5 +15,5 @@ public class Job : ModelBase
     // Navigation properties
     public Customer Customer { get; set; } = new();
     public Venue Venue { get; set; } = new();
-    public IEnumerable<Transaction> Transactions { get; set; } = [];
+    public IEnumerable<Transaction> Transactions { get; set; } = new List<Transaction>();
 }

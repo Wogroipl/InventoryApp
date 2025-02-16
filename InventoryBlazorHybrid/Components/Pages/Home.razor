@@ -2,7 +2,7 @@
 
 <h1>Home</h1>
 
-@* <FluentStack Orientation="Orientation.Horizontal">
+<FluentStack Orientation="Orientation.Horizontal">
     <FluentSearch Placeholder="Search jobs" @bind-Value="SearchText" @bind-Value:after="FilterJobs" Immediate="true" />
 </FluentStack>
 @if (FilteredJobs is null)
@@ -23,10 +23,10 @@ else
         <PropertyColumn Property="@(j => j.Customer.Name)" Title="Customer" Sortable="true" Width="1fr" />
         <PropertyColumn Property="@(j => j.Venue.Name)" Title="Venue" Sortable="true" Width="1fr" />
         <TemplateColumn Width="1fr" Context="Job">
-            <FluentButton IconStart="new Icons.Regular.Size20.Edit()" Appearance="Appearance.Accent" @onclick="() => EditJob(Job.Id)"/>
-            <FluentButton IconStart="new Icons.Regular.Size20.Delete()" Appearance="Appearance.Accent" @onclick="() => DeleteJob(Job.Id)"/>
+            <FluentButton IconStart="new Icons.Regular.Size20.Edit()" Appearance="Appearance.Accent" @onclick="() => EditJob(Job)"/>
+            <FluentButton IconStart="new Icons.Regular.Size20.Delete()" Appearance="Appearance.Accent" @onclick="() => DeleteJob(Job)"/>
             <FluentButton IconStart="new Icons.Regular.Size20.Print()" Appearance="Appearance.Accent"/>
         </TemplateColumn>
 
     </FluentDataGrid>
-} *@
+}

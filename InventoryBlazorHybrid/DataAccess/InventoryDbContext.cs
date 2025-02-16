@@ -5,14 +5,14 @@ namespace InventoryBlazorHybrid.DataAccess;
 
 public class InventoryDbContext : DbContext
 {
-    DbSet<Job> Jobs { get; set; }
-    DbSet<Product> Products { get; set; }
-    DbSet<Transaction> Transactions { get; set; }
-    DbSet<Venue> Venues { get; set; }
-    DbSet<VenueHall> VenueHalls { get; set; }
-    DbSet<Customer> Customers { get; set; }
-    DbSet<Category> Categories { get; set; }
-    DbSet<ContactPerson> Contacts { get; set; }
+    public DbSet<Job> Jobs { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Transaction> Transactions { get; set; }
+    public DbSet<Venue> Venues { get; set; }
+    public DbSet<VenueHall> VenueHalls { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<ContactPerson> Contacts { get; set; }
 
 
     /// <summary>
