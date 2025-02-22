@@ -2,9 +2,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:InventoryAppAvalonia.ViewModels"
              mc:Ignorable="d" d:DesignWidth="1080" d:DesignHeight="720"
-             x:Class="InventoryAppAvalonia.Views.HomeView">
-	<Grid>
+             x:Class="InventoryAppAvalonia.Views.HomeView"
+			 x:DataType="vm:HomeViewModel">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:HomeViewModel />
+	</Design.DataContext>
+
+	<Grid RowDefinitions="Auto,*">
 		<Label HorizontalAlignment="Center" VerticalAlignment="Top" Content="Home" FontSize="24" />
+		<DataGrid Grid.Row="1"
+				  ItemsSource="{Binding FilteredJobs}"
+				  AutoGenerateColumns="False"
+				  GridLinesVisibility="All"
+				  Margin="20">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Job Name" Binding="{Binding Name}" Width="3*" />
+				<DataGridTextColumn Header="Customer" Binding="{Binding Customer.Name}" Width="*" />
+				<DataGridTextColumn Header="Venue" Binding="{Binding Venue.Name}" Width="*"/>
+				<DataGridTextColumn Header="Loadin" Binding="{Binding Loadin}" Width="*"/>
+				<DataGridTextColumn Header="Loadout" Binding="{Binding Loadout}" Width="*"/>
+				<DataGridTemplateColumn Width="100">
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+
+		</DataGrid>
+
 	</Grid>
 </UserControl>

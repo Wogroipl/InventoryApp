@@ -1,56 +1,69 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Design.PreviewWith>
-        <Border Padding="5" Width="200">
-            <!-- Add Controls for Previewer Here -->
-            <Button Classes="icon_only">
-                <StackPanel Orientation="Horizontal" >
-                    <Label Classes="icon" Content="&#xE713;" />
-                </StackPanel>
-            </Button>
-        </Border>
-    </Design.PreviewWith>
+	<Design.PreviewWith>
+		<Border Padding="5" Width="200">
+			<!-- Add Controls for Previewer Here -->
+			<Button HorizontalAlignment="Stretch">
+				<Grid ColumnDefinitions="48,*">
+					<Rectangle/>
+					<Label Classes="icon" Content="&#xF0E4;" />
+					<Label Grid.Column="1">Job</Label>
+				</Grid>
+			</Button>
+		</Border>
+	</Design.PreviewWith>
 
-    <!-- Add Styles Here -->
-    
-    <!-- Sets the default font size for buttons -->
-    <Style Selector="Button">
-        <Setter Property="FontSize" Value="14" />
-    </Style>
-    
-    <!-- Sets Icons font for the icon label at the start of a button -->
-    <Style Selector="Label.icon">
-        <Setter Property="FontFamily" Value="{DynamicResource Icons}" />
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="Margin" Value="0 0 5 0" />
-    </Style>
-    
-    <!-- Sets properties for Icon only buttons -->
-    <Style Selector="Button.icon_only">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Padding" Value="5 5 0 5" />
-        <Setter Property="Margin" Value="0" />
-    </Style>
-    
-    <!-- Sets the background of the button to transparent when hovered -->
-    <Style Selector="Button.icon_only:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="Transparent" />
-    </Style>
-    
-    <!-- Initial rotation rendertransform -->
-    <Style Selector="Button.icon_only">
-        <Setter Property="RenderTransform" Value="rotate(0)" />
-        <Setter Property="Transitions">
-            <Transitions>
-                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" />
-            </Transitions>
-        </Setter>
-    </Style>
-    
-    <!-- Hover rotation rendertransform -->
-    <Style Selector="Button.icon_only:pointerover">
-        <Setter Property="RenderTransform" Value="rotate(1turn)"/>
-    </Style>
-    
+	<!-- Add Styles Here -->
+
+	<!-- Sets the default font size for buttons -->
+	<Style Selector="Button">
+		<Setter Property="FontSize" Value="14" />
+	</Style>
+
+	<!-- Sets Icons font for the icon label at the start of a button -->
+	<Style Selector="Label.icon">
+		<Setter Property="FontFamily" Value="{DynamicResource Icons}" />
+		<Setter Property="FontSize" Value="16" />
+	</Style>
+
+	<!-- Sets properties for Icon only buttons -->
+	<Style Selector="Button.icon_only">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Padding" Value="5 5 0 5" />
+		<Setter Property="Margin" Value="0" />
+	</Style>
+
+	<!-- Sets the background of the button to transparent when hovered -->
+	<Style Selector="Button.icon_only:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent" />
+	</Style>
+
+	<!-- Initial rotation rendertransform -->
+	<Style Selector="Button.icon_only Label">
+		<Setter Property="RenderTransform" Value="rotate(0)" />
+		<Setter Property="Transitions">
+			<Transitions>
+				<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" />
+			</Transitions>
+		</Setter>
+	</Style>
+
+	<!-- Hover rotation rendertransform -->
+	<Style Selector="Button.icon_only:pointerover Label">
+		<Setter Property="RenderTransform" Value="rotate(1turn)"/>
+	</Style>
+
+	<Style Selector="Rectangle">
+		<Setter Property="Fill" Value="{DynamicResource SystemControlBackgroundAccentBrush}"/>
+		<Setter Property="Stroke" Value="{DynamicResource SystemControlBackgroundAccentBrush}"/>
+		<Setter Property="StrokeThickness" Value="3"/>
+		<Setter Property="Width" Value="3"/>
+		<Setter Property="Height" Value="22"/>
+		<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Setter Property="Margin" Value="-8 0 0 0"/>
+		<Setter Property="StrokeJoin" Value="Round"/>
+	</Style>
+
+
 
 </Styles>

@@ -11,9 +11,9 @@ public partial class HomeViewModel : ViewModelBase
 {
     #region Properties
     // Collection of jobs
-    public ObservableCollection<Job>? Jobs { get; private set; }
+    public ObservableCollection<Job>? Jobs { get; private set; } = new();
     // Filtered collection of jobs
-    public ObservableCollection<Job>? FilteredJobs { get; private set; }
+    public ObservableCollection<Job>? FilteredJobs { get; private set; } = new();
 
     /// <summary>
     /// Search text for filtering jobs.
