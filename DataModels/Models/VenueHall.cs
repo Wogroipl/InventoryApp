@@ -9,4 +9,5 @@ public class VenueHall : ModelBase
 
     // Navigation properties
     public Venue Venue { get; set; } = new Venue();
+    public IEnumerable<Job> Jobs { get; set; } = new List<Job>();
 }

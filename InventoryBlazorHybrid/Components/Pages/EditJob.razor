@@ -2,14 +2,23 @@
 
 <h1>Edit Job</h1>
 
-<FluentTextField @bind-Value=CurrentJob.Name Label="Naam"></FluentTextField>
-<FluentTextField @bind-Value=CurrentJob.Customer.Name Label="CustomerName"></FluentTextField>
-<FluentTextField @bind-Value=CurrentJob.Venue.Name Label="VenueName"></FluentTextField>
+<FluentTextField @bind-Value=CurrentJob.Name Label="Naam" Size="100"></FluentTextField>
+<FluentAutocomplete TOption="Customer"
+					@ref="customerAutocomplete"
+                    Placeholder="Customer"
+                    @bind-SelectedOption="CurrentJob.Customer">
+</FluentAutocomplete>
+<FluentAutocomplete Placeholder="Venue" @bind-SelectedOption="CurrentJob.Venue" Autocomplete="ComboboxAutocomplete.Both" TOption="Venue">
+    @foreach (var venue in Venues)
+    {
+        <FluentOption Value="@venue.Id.ToString()">@venue.Name</FluentOption>
+    }
+</FluentAutocomplete>
 
-<FluentDataGrid Items="@(Transactions)" RowSize="DataGridRowSize.Medium">
-    <PropertyColumn Property="@(t => t.Product.Name)" Title="Product Name" Sortable="true" Width="1fr" />
+<FluentDataGrid Items="@(Transactions)" RowSize="DataGridRowSize.Medium" ShowHover="true">
+    <PropertyColumn Property="@(t => t.Product.Name)" Title="Product Name" Sortable="true" Width="3fr" />
     <PropertyColumn Property="@(t => t.Quantity)" Title="Quantity" Sortable="true" Width="1fr" />
-    <TemplateColumn Width="1fr" Context="Transaction">
+    <TemplateColumn Width="8rem" Context="Transaction">
         <FluentButton IconStart="new Icons.Regular.Size20.Delete()" Appearance="Appearance.Accent" @onclick="() => DeleteTransaction(Transaction.Id)" />
     </TemplateColumn>
 </FluentDataGrid>

@@ -1,6 +1,7 @@
 ﻿using InventoryBlazorHybrid.DataAccess;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using Repository.Core;
 using Repository.Models;
 
 namespace InventoryBlazorHybrid.Components.Pages;
@@ -39,12 +40,12 @@ public partial class Home
     /// </summary>
     private DateTime _startDate = DateTime.Today;
 
-    public DateTime StartDate
+    public DateTime? StartDate
     {
         get => _startDate;
         set
         {
-            _startDate = value;
+            _startDate = (DateTime)value!;
         }
     }
 
@@ -53,12 +54,24 @@ public partial class Home
     /// </summary>
     private DateTime _endDate = DateTime.Today.AddDays(30);
 
-    public DateTime EndDate
+    public DateTime? EndDate
     {
         get { return _endDate; }
         set
         {
-            _endDate = value;
+            _endDate = (DateTime)value!;
+        }
+    }
+
+    private bool _includePast { get; set; }
+
+    public bool IncludePast
+    {
+        get => _includePast;
+        set
+        {
+            _includePast = value;
+            FilterJobs();
         }
     }
     #endregion
@@ -75,31 +88,40 @@ public partial class Home
     public async ValueTask LoadJobsAsync()
     {
         var result = await DbContext!.Jobs
-            .Include(j => j.Customer)
-            .Include(j => j.Venue)
-            .Include(j => j.Transactions)
+            //.Include(j => j.Customer)
+            //.Include(j => j.Venue)
             .ToListAsync();
         Jobs = result.AsQueryable();
         FilterJobs();
     }
 
     /// <summary>
-    /// Filters jobs based on search text.
+    /// Filters jobs based on search text and date range.
     /// </summary>
     public void FilterJobs()
     {
+
         if (Jobs == null)
         {
             return;
         }
-        if (string.IsNullOrWhiteSpace(SearchText))
+        DateRange dateRange = new((DateTime)StartDate!, (DateTime)EndDate!);
+
+        if (IncludePast)
         {
+            dateRange = new(DateTime.MinValue, (DateTime)EndDate!);
+        }
+
+        var filtered = Jobs;
+
+        if (!string.IsNullOrWhiteSpace(SearchText))
+        {
+            filtered = filtered.Where(j => j.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
             FilteredJobs = Jobs;
         }
-        else
-        {
-            FilteredJobs = Jobs.Where(j => j.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
-        }
+        filtered = filtered.Where(j => dateRange.Includes(j.Loadin) || dateRange.Includes(j.Loadout));
+
+        FilteredJobs = filtered;
     }
 
     /// <summary>
@@ -112,6 +134,26 @@ public partial class Home
         DbContext!.Remove<Job>(job);
         await DbContext.SaveChangesAsync();
         await LoadJobsAsync();
+    }
+
+    /// <summary>
+    /// Filters jobs for the next week.
+    /// </summary>#
+    public void FilterWeek()
+    {
+        StartDate = DateTime.Today;
+        EndDate = DateTime.Today.AddDays(7);
+        FilterJobs();
+    }
+
+    /// <summary>
+    /// Filters jobs for the next month.
+    /// </summary>
+    public void FilterMonth()
+    {
+        StartDate = DateTime.Today;
+        EndDate = DateTime.Today.AddDays(30);
+        FilterJobs();
     }
     #endregion
 }

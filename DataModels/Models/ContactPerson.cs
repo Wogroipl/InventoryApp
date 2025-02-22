@@ -12,4 +12,5 @@ public class ContactPerson : ModelBase
 
     // Navigation properties
     public IEnumerable<Customer> Customers { get; set; } = new List<Customer>();
+    public IEnumerable<Job> Jobs { get; set; } = new List<Job>();
 }
