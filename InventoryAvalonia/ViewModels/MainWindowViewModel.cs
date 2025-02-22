@@ -21,12 +21,14 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private PageType _activePage;
 
+    // Toggle the pane
     [RelayCommand]
     public void TogglePane()
     {
         IsPaneOpen = !IsPaneOpen;
     }
 
+    // Navigate to the home page
     [RelayCommand]
     private void NavigateHome()
     {
@@ -34,6 +36,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ActivePage = PageType.Home;
     }
 
+    //Navigate to the job page
     [RelayCommand]
     private void NavigateJob()
     {
@@ -41,6 +44,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ActivePage = PageType.Job;
     }
 
+    //Navigate to the inventory page
     [RelayCommand]
     private void NavigateInventory()
     {
@@ -48,6 +52,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ActivePage = PageType.Inventory;
     }
 
+    //Navigate to the customers page
     [RelayCommand]
     private void NavigateCustomers()
     {
@@ -55,6 +60,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ActivePage = PageType.Customers;
     }
 
+    //Navigate to the venues page
     [RelayCommand]
     private void NavigateVenues()
     {
