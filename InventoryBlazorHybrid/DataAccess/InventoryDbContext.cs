@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Models;
 
-namespace InventoryBlazorHybrid.DataAccess;
+namespace InventoryAppAvalonia.DataAccess;
 
 public class InventoryDbContext : DbContext
 {

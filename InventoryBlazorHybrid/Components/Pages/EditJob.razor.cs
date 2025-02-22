@@ -1,6 +1,7 @@
 ﻿using InventoryBlazorHybrid.DataAccess;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.FluentUI.AspNetCore.Components;
 using Repository.Models;
 
 namespace InventoryBlazorHybrid.Components.Pages;
@@ -17,7 +18,35 @@ public partial class EditJob : ComponentBase
 
     public IQueryable<Transaction>? Transactions { get; set; }
 
-    protected override async Task OnInitializedAsync() => await LoadJobAsync(JobId);
+    public List<Customer> Customers { get; set; } = new();
+
+    public List<Venue> Venues { get; set; } = new();
+
+    private FluentAutocomplete<Customer>? customerAutocomplete;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadJobAsync(JobId);
+        await LoadCustomersAsync();
+        await LoadVenuesAsync();
+    }
+
+    private async Task LoadVenuesAsync()
+    {
+        if (DbContext != null)
+        {
+            Customers = await DbContext.Customers.ToListAsync();
+        }
+    }
+
+    private async Task LoadCustomersAsync()
+    {
+        if (DbContext != null)
+        {
+            Venues = await DbContext.Venues.ToListAsync();
+        }
+    }
 
     private async ValueTask LoadJobAsync(Guid? jobId)
     {

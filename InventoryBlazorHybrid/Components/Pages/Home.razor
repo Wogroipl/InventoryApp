@@ -2,9 +2,24 @@
 
 <h1>Home</h1>
 
-<FluentStack Orientation="Orientation.Horizontal">
-    <FluentSearch Placeholder="Search jobs" @bind-Value="SearchText" @bind-Value:after="FilterJobs" Immediate="true" />
-</FluentStack>
+<FluentGrid Spacing="3">
+	<FluentGridItem lg="6">
+        <FluentStack Orientation="Orientation.Vertical">
+            <FluentSearch Placeholder="Search jobs" Label="Search" @bind-Value="SearchText" @bind-Value:after="FilterJobs" Immediate="true" ImmediateDelay="200" AutoComplete="on" Size="250"/>
+            <FluentStack Orientation="Orientation.Horizontal"> 
+                <FluentButton Appearance="Appearance.Accent" @onclick="FilterWeek">Week</FluentButton>
+                <FluentButton Appearance="Appearance.Accent" @onclick="FilterMonth">Month</FluentButton>
+                <FluentCheckbox Label="Include past jobs" @bind-Value="IncludePast"/>
+            </FluentStack>
+        </FluentStack>
+	</FluentGridItem>
+    <FluentGridItem lg="6">
+        <FluentStack Orientation="Orientation.Vertical">
+            <FluentDatePicker Label="From" @bind-Value="StartDate"/>
+			<FluentDatePicker Label="To" @bind-Value="EndDate"/>
+        </FluentStack>
+	</FluentGridItem>
+</FluentGrid>
 @if (FilteredJobs is null)
 {
     <p><em>Loading...</em></p>
@@ -17,12 +32,12 @@ else if (!FilteredJobs.Any())
 else
 {
     <FluentDataGrid Items="@FilteredJobs" RowSize="DataGridRowSize.Medium">
-        <PropertyColumn Property="@(j => j.Name)"Sortable="true" Width="50%"/>
+        <PropertyColumn Property="@(j => j.Name)"Sortable="true" Width="8fr"/>
         <PropertyColumn Property="@(j => j.Loadin)" Format="dd-MM" Sortable="true" Width="1fr" IsDefaultSortColumn="true" />
         <PropertyColumn Property="@(j => j.Loadout)" Format="dd-MM" Sortable="true" Width="1fr" />
-        <PropertyColumn Property="@(j => j.Customer.Name)" Title="Customer" Sortable="true" Width="1fr" />
-        <PropertyColumn Property="@(j => j.Venue.Name)" Title="Venue" Sortable="true" Width="1fr" />
-        <TemplateColumn Width="1fr" Context="Job">
+        @* <PropertyColumn Property="@(j => j.Customer.Name)" Title="Customer" Sortable="true" Width="1fr" />
+        <PropertyColumn Property="@(j => j.Venue.Name)" Title="Venue" Sortable="true" Width="1fr" /> *@
+        <TemplateColumn Width="10rem" Context="Job">
             <FluentButton IconStart="new Icons.Regular.Size20.Edit()" Appearance="Appearance.Accent" @onclick="() => EditJob(Job)"/>
             <FluentButton IconStart="new Icons.Regular.Size20.Delete()" Appearance="Appearance.Accent" @onclick="() => DeleteJob(Job)"/>
             <FluentButton IconStart="new Icons.Regular.Size20.Print()" Appearance="Appearance.Accent"/>

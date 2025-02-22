@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "InventoryWinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "InventoryWinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
