@@ -13,10 +13,10 @@ public partial class HomeViewModel : ViewModelBase
     #region Properties
     // Collection of jobs
     [ObservableProperty]
-    public IEnumerable<Job>? jobs;
+    public ObservableCollection<Job>? _jobs;
     // Filtered collection of jobs
     [ObservableProperty]
-    public IEnumerable<Job>? filteredJobs;
+    public ObservableCollection<Job>? _filteredJobs;
 
 
     private InventoryDbContext _context { get; }
@@ -59,7 +59,7 @@ public partial class HomeViewModel : ViewModelBase
     /// Loads all jobs from the data service.
     /// </summary>
     /// <returns></returns>
-    public async ValueTask LoadJobsAsync()
+    public async Task LoadJobsAsync()
     {
         var result = await _context!.Jobs
             .Include(j => j.Customer)

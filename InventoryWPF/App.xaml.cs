@@ -28,7 +28,7 @@ public partial class App : Application
         services.AddSingleton<IConfiguration>(configuration);
         services.AddDbContext<InventoryDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("InventoryDb"));
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         });
 
         services.AddSingleton<MainWindow>(provider => new MainWindow

@@ -11,6 +11,9 @@ public partial class MainViewModel : ViewModelBase
     private bool _isPaneOpen = true;
 
     [ObservableProperty]
+    private int _paneWidth = 200;
+
+    [ObservableProperty]
     private PageType _activePage;
 
     private PageFactory _pageFactory;
@@ -23,6 +26,7 @@ public partial class MainViewModel : ViewModelBase
     public void TogglePane()
     {
         IsPaneOpen = !IsPaneOpen;
+        PaneWidth = IsPaneOpen ? 200 : 48;
     }
 
     // Navigate to the home page
