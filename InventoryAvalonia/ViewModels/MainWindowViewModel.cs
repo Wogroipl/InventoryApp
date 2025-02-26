@@ -1,25 +1,22 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using InventoryAppAvalonia.Factories;
 using Repository.Core;
 
 namespace InventoryAppAvalonia.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private readonly HomeViewModel _homePage = new();
-    private readonly JobViewModel _jobPage = new();
-    private readonly InventoryViewModel _inventoryPage = new();
-    private readonly CustomersViewModel _customersPage = new();
-    private readonly VenuesViewModel _venuesPage = new();
-
     [ObservableProperty]
     private bool _isPaneOpen = true;
 
     [ObservableProperty]
-    private ViewModelBase? _currentViewModel = new();
+    private PageType _activePage;
+
+    private PageFactory _pageFactory;
 
     [ObservableProperty]
-    private PageType _activePage;
+    private ViewModelBase? _currentPage;
 
     // Toggle the pane
     [RelayCommand]
@@ -32,7 +29,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateHome()
     {
-        CurrentViewModel = _homePage;
+        CurrentPage = _pageFactory.GetViewModel(PageType.Home);
         ActivePage = PageType.Home;
     }
 
@@ -40,7 +37,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateJob()
     {
-        CurrentViewModel = _jobPage;
+        CurrentPage = _pageFactory.GetViewModel(PageType.Job);
         ActivePage = PageType.Job;
     }
 
@@ -48,7 +45,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateInventory()
     {
-        CurrentViewModel = _inventoryPage;
+        CurrentPage = _pageFactory.GetViewModel(PageType.Inventory);
         ActivePage = PageType.Inventory;
     }
 
@@ -56,7 +53,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateCustomers()
     {
-        CurrentViewModel = _customersPage;
+        CurrentPage = _pageFactory.GetViewModel(PageType.Customers);
         ActivePage = PageType.Customers;
     }
 
@@ -64,7 +61,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateVenues()
     {
-        CurrentViewModel = _venuesPage;
+        CurrentPage = _pageFactory.GetViewModel(PageType.Venues);
         ActivePage = PageType.Venues;
     }
 
@@ -72,9 +69,10 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>
     /// MainWindowViewModel constructor
     /// </summary>
-    public MainWindowViewModel()
-    {
-        _currentViewModel = new HomeViewModel();
-    }
 
+    public MainWindowViewModel(PageFactory pageFactory)
+    {
+        _pageFactory = pageFactory;
+        NavigateHome();
+    }
 }

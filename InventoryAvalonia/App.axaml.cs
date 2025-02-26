@@ -4,12 +4,14 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using InventoryAppAvalonia.DataAccess;
+using InventoryAppAvalonia.Factories;
 using InventoryAppAvalonia.ViewModels;
 using InventoryAppAvalonia.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Repository.Core;
+using Repository.DataAccess;
 
 namespace InventoryAppAvalonia;
 
@@ -38,22 +40,41 @@ public partial class App : Application
             //Configure services
             var collection = new ServiceCollection();
             //register services
+
+
             //Add DBContext
             collection.AddDbContext<InventoryDbContext>(options =>
                                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             //register view models
             collection.AddTransient<MainWindowViewModel>();
+            collection.AddTransient<HomeViewModel>();
+            collection.AddTransient<JobViewModel>();
+            collection.AddTransient<InventoryViewModel>();
+            collection.AddTransient<CustomersViewModel>();
+            collection.AddTransient<VenuesViewModel>();
+
+            //register viewmodelfactory
+            collection.AddSingleton<Func<PageType, ViewModelBase>>(serviceProvider => pageType =>
+            {
+                return pageType switch
+                {
+                    PageType.Home => serviceProvider.GetRequiredService<HomeViewModel>(),
+                    PageType.Job => serviceProvider.GetRequiredService<JobViewModel>(),
+                    PageType.Inventory => serviceProvider.GetRequiredService<InventoryViewModel>(),
+                    PageType.Customers => serviceProvider.GetRequiredService<CustomersViewModel>(),
+                    PageType.Venues => serviceProvider.GetRequiredService<VenuesViewModel>(),
+                    _ => throw new ArgumentOutOfRangeException(nameof(pageType), pageType, null)
+                };
+            });
+            collection.AddSingleton<PageFactory>();
 
             //build service provider
             var services = collection.BuildServiceProvider();
 
-            //get the view model
-            var vm = services.GetRequiredService<MainWindowViewModel>();
-
             desktop.MainWindow = new MainWindow
             {
-                DataContext = vm
+                DataContext = services.GetRequiredService<MainWindowViewModel>()
             };
         }
 

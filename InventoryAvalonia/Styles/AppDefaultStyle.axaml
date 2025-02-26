@@ -64,6 +64,8 @@
 		<Setter Property="StrokeJoin" Value="Round"/>
 	</Style>
 
-
+	<Style Selector="DataGridCell">
+		<Setter	Property="FontSize"	Value="12"/>
+	</Style>
 
 </Styles>

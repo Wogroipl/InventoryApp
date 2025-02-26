@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Models;
 
-namespace InventoryAppAvalonia.DataAccess;
+namespace Repository.DataAccess;
 
 public class InventoryDbContext : DbContext
 {

@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore;
 using Repository.Core;
+using Repository.DataAccess;
 using Repository.Models;
 
 namespace InventoryAppAvalonia.ViewModels;
@@ -11,9 +16,14 @@ public partial class HomeViewModel : ViewModelBase
 {
     #region Properties
     // Collection of jobs
-    public ObservableCollection<Job>? Jobs { get; private set; } = new();
+    [ObservableProperty]
+    public IEnumerable<Job>? jobs;
     // Filtered collection of jobs
-    public ObservableCollection<Job>? FilteredJobs { get; private set; } = new();
+    [ObservableProperty]
+    public IEnumerable<Job>? filteredJobs;
+
+
+    private InventoryDbContext _context { get; }
 
     /// <summary>
     /// Search text for filtering jobs.
@@ -37,14 +47,14 @@ public partial class HomeViewModel : ViewModelBase
     [ObservableProperty]
     private bool _includePast = false;
 
-    //public InventoryDbContext DbContext { get; }
     #endregion
 
     #region Constructor
-    public HomeViewModel()
+    public HomeViewModel(InventoryDbContext context)
     {
-        // DbContext = dbContext;
-        //LoadJobsAsync().ConfigureAwait(false);
+        PageName = PageType.Home;
+        _context = context;
+        LoadJobsAsync();
     }
     #endregion
 
@@ -53,18 +63,16 @@ public partial class HomeViewModel : ViewModelBase
     /// Loads all jobs from the data service.
     /// </summary>
     /// <returns></returns>
-   /* public async ValueTask LoadJobsAsync()
+    public async ValueTask LoadJobsAsync()
     {
-        if (Jobs is null)
-        {
-            var result = await DbContext!.Jobs
-                //.Include(j => j.Customer)
-                //.Include(j => j.Venue)
-                .ToListAsync();
-            Jobs = new ObservableCollection<Job>(result);
-            FilterJobs();
-        }
-    }*/
+        var result = await _context!.Jobs
+            .Include(j => j.Customer)
+            .Include(j => j.Venue)
+            .ToListAsync();
+        Jobs = new ObservableCollection<Job>(result);
+        FilterJobs();
+
+    }
 
     /// <summary>
     /// Filters jobs based on search text and date range.
@@ -83,14 +91,10 @@ public partial class HomeViewModel : ViewModelBase
             dateRange = new(DateTime.MinValue, (DateTime)EndDate!);
         }
 
-        if (!string.IsNullOrWhiteSpace(SearchText))
-        {
-            var filtered = Jobs.Where(j =>
-                (string.IsNullOrWhiteSpace(SearchText) || j.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)) &&
-                (dateRange.Includes(j.Loadin) || dateRange.Includes(j.Loadout)));
-            FilteredJobs = new ObservableCollection<Job>(filtered.ToList());
-        }
+        var filtered = Jobs.Where(j => j.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) &&
+            (dateRange.Includes(j.Loadin) || dateRange.Includes(j.Loadout)));
 
+        FilteredJobs = new ObservableCollection<Job>(filtered);
     }
 
     /// <summary>
@@ -108,6 +112,7 @@ public partial class HomeViewModel : ViewModelBase
     /// <summary>
     /// Filters jobs for the next week.
     /// </summary>#
+    [RelayCommand]
     public void FilterWeek()
     {
         StartDate = DateTime.Today;
@@ -118,6 +123,7 @@ public partial class HomeViewModel : ViewModelBase
     /// <summary>
     /// Filters jobs for the next month.
     /// </summary>
+    [RelayCommand]
     public void FilterMonth()
     {
         StartDate = DateTime.Today;

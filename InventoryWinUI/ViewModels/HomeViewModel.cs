@@ -1,5 +1,11 @@
-﻿namespace InventoryWinUI.ViewModels;
+﻿using Repository.Core;
 
-public class HomeViewModel
+namespace InventoryWinUI.ViewModels;
+
+public partial class HomeViewModel : ViewModelBase
 {
+    public HomeViewModel()
+    {
+        PageName = PageType.Home;
+    }
 }

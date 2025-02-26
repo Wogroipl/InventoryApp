@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryWinUI", "Inventory
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryAppAvalonia", "InventoryAvalonia\InventoryAppAvalonia.csproj", "{11E523CB-D222-4FC9-A710-9E5F01924DDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryWPF", "InventoryWPF\InventoryWPF.csproj", "{A9198CC3-CC1E-4087-8E3B-C76D031EB073}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,8 +97,27 @@ Global
 		{11E523CB-D222-4FC9-A710-9E5F01924DDA}.Release|x64.Build.0 = Release|Any CPU
 		{11E523CB-D222-4FC9-A710-9E5F01924DDA}.Release|x86.ActiveCfg = Release|Any CPU
 		{11E523CB-D222-4FC9-A710-9E5F01924DDA}.Release|x86.Build.0 = Release|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Debug|x64.Build.0 = Debug|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Debug|x86.Build.0 = Debug|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Release|ARM64.Build.0 = Release|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Release|x64.ActiveCfg = Release|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Release|x64.Build.0 = Release|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Release|x86.ActiveCfg = Release|Any CPU
+		{A9198CC3-CC1E-4087-8E3B-C76D031EB073}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FFF70335-0B82-4CCA-81A5-87E97B25C470}
 	EndGlobalSection
 EndGlobal

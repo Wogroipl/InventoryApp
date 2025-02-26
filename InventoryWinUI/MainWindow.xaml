@@ -5,45 +5,11 @@
         xmlns:local="using:InventoryWinUI"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:view="using:InventoryWinUI.Views"
         mc:Ignorable="d"
         Title="InventoryWinUI">
-
-
-    <NavigationView x:Name="nvSample">
-        <NavigationView.MenuItems>
-            <NavigationViewItem Content="Home"
-                                Tag="Home"
-                                IsSelected="True">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xE80F;" />
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Content="Job"
-                                Tag="SamplePage2">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xF0E4;" />
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Content="Inventory"
-                                Tag="SamplePage2">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xED0E;" />
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Content="Customers"
-                                Tag="SamplePage2">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xE779;" />
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Content="Venues"
-                                Tag="SamplePage2">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xEC08;" />
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-        </NavigationView.MenuItems>
-        <Frame x:Name="contentFrame" />
-    </NavigationView>
-
+    <Border>
+        <Frame x:Name="mainFrame">
+        </Frame>
+    </Border>
 </Window>

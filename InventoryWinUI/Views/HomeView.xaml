@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<UserControl x:Class="InventoryWinUI.Views.UserControl1"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:InventoryWinUI.Views"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
-             mc:Ignorable="d">
+<Page
+    x:Class="InventoryWinUI.Views.HomeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InventoryWinUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-
+        <TextBlock Text="Home"
+                   Style="{StaticResource HeaderTextBlockStyle}"
+                   Margin="12"
+                   HorizontalAlignment="Center"/>
         <controls:DataGrid x:Name="dataGrid"
                            Grid.Row="1"
                            AutoGenerateColumns="False">
@@ -30,4 +34,4 @@
             </controls:DataGrid.Columns>
         </controls:DataGrid>
     </Grid>
-</UserControl>
+</Page>

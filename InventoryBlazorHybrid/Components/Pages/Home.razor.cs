@@ -1,7 +1,7 @@
-﻿using InventoryBlazorHybrid.DataAccess;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Repository.Core;
+using Repository.DataAccess;
 using Repository.Models;
 
 namespace InventoryBlazorHybrid.Components.Pages;
