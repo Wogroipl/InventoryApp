@@ -19,7 +19,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding PaneWidth}" />
+            <ColumnDefinition Width="{Binding PaneWidth}" d:Width="200"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid>
@@ -34,7 +34,8 @@
                    Source="/Assets/Images/DC Icon.png"
                    VerticalAlignment="Top"
                    Margin="4 10 4 10"
-                   Visibility="{Binding IsPaneOpen, Converter={StaticResource BooleantoVisibilityConverter}, ConverterParameter=Inverse}" />
+                   Visibility="{Binding IsPaneOpen, Converter={StaticResource BooleantoVisibilityConverter}, ConverterParameter=Inverse}"
+                   d:Visibility="Hidden"/>
             <Image Grid.Row="0"
                    Source="/Assets/Images/Logo_DC_zonder_text.png"
                    Width="170"
@@ -45,6 +46,8 @@
                 <Button FontFamily="{StaticResource SymbolThemeFontFamily}"
                         Content="&#xE700;"
                         FontSize="16"
+                        Height="38"
+                        Width="38"
                         Margin="5 10 5 0"
                         Command="{Binding TogglePaneCommand}" />
 
@@ -62,10 +65,13 @@
             <Button Grid.Row="2"
                     FontFamily="{StaticResource SymbolThemeFontFamily}"
                     Content="&#xE713;"
+                    Height="38"
+                    Width="38"
                     Margin="5 0 0 5" />
 
         </Grid>
         <ContentControl Grid.Column="1"
-                        Content="{Binding CurrentPage}" />
+                        Content="{Binding CurrentPage}"
+                        Margin="0 5 5 5"/>
     </Grid>
 </Window>
