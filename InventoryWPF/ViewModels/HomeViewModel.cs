@@ -46,6 +46,10 @@ public partial class HomeViewModel : ViewModelBase
     #endregion
 
     #region Constructor
+    /// <summary>
+    /// Constructor for HomeViewModel.
+    /// </summary>
+    /// <param name="context">InventoryDbContext from the Repository.DataAccess namespace</param>
     public HomeViewModel(InventoryDbContext context)
     {
         PageName = PageType.Home;
@@ -55,11 +59,12 @@ public partial class HomeViewModel : ViewModelBase
     #endregion
 
     #region Methods
+
     /// <summary>
     /// Loads all jobs from the data service.
     /// </summary>
     /// <returns></returns>
-    public async Task LoadJobsAsync()
+    public async ValueTask LoadJobsAsync()
     {
         var result = await _context!.Jobs
             .Include(j => j.Customer)

@@ -6,12 +6,14 @@
         xmlns:local="clr-namespace:InventoryWPF"
         xmlns:converters="clr-namespace:InventoryWPF.Converters"
         xmlns:controls="clr-namespace:InventoryWPF.Controls"
+        xmlns:core="clr-namespace:Repository.Core;assembly=Repository"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="720"
         Width="1280"
         MinHeight="720"
-        MinWidth="1280">
+        MinWidth="1280"
+        ThemeMode="Dark">
 
     <Window.Resources>
         <converters:BooleantoVisibilityConverter x:Key="BooleantoVisibilityConverter" />
@@ -50,17 +52,28 @@
                         Width="38"
                         Margin="5 10 5 0"
                         Command="{Binding TogglePaneCommand}" />
+                
 
                 <controls:IconButton Icon="&#xE80F;"
-                                     Text="Home" />
+                                     Text="Home"
+                                     Command="{Binding NavigateCommand}"
+                                     CommandParameter="{x:Static core:PageType.Home}"/>
                 <controls:IconButton Icon="&#xF0E4;"
-                                     Text="Job" />
+                                     Text="Job"
+                                     Command="{Binding NavigateCommand}"
+                                     CommandParameter="{x:Static core:PageType.Job}" />
                 <controls:IconButton Icon="&#xED0E;"
-                                     Text="Inventory" />
+                                     Text="Inventory"
+                                     Command="{Binding NavigateCommand}"
+                                     CommandParameter="{x:Static core:PageType.Inventory}" />
                 <controls:IconButton Icon="&#xE779;"
-                                     Text="Customers" />
+                                     Text="Customers"
+                                     Command="{Binding NavigateCommand}"
+                                     CommandParameter="{x:Static core:PageType.Customers}" />
                 <controls:IconButton Icon="&#xE825;"
-                                     Text="Venues" />
+                                     Text="Venues"
+                                     Command="{Binding NavigateCommand}"
+                                     CommandParameter="{x:Static core:PageType.Venues}" />
             </StackPanel>
             <Button Grid.Row="2"
                     FontFamily="{StaticResource SymbolThemeFontFamily}"

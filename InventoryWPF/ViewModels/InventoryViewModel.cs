@@ -1,12 +1,47 @@
-﻿using Repository.Core;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore;
+using Repository.Core;
+using Repository.DataAccess;
+using Repository.Models;
 
 namespace InventoryWPF.ViewModels;
 
 public partial class InventoryViewModel : ViewModelBase
 {
-    public InventoryViewModel()
+    private InventoryDbContext _context { get; }
+
+    #region Properties
+    // Collection of products
+    [ObservableProperty]
+    public ObservableCollection<Product> _products = new();
+
+    #endregion
+
+    #region Constructor
+    /// <summary>
+    /// Constructor for InventoryViewModel.
+    /// </summary>
+    /// <param name="context">InventoryDbContext from the Repository.DataAccess namespace</param>
+    public InventoryViewModel(InventoryDbContext context)
     {
         PageName = PageType.Inventory;
+        _context = context;
+        LoadProductsAsync();
     }
+    #endregion
+
+    #region Methods
+    /// <summary>
+    /// Load the List of Products from the database.
+    /// </summary>
+    private async ValueTask LoadProductsAsync()
+    {
+        var result = await _context.Products.ToListAsync();
+        Products = new ObservableCollection<Product>(result);
+    }
+
+
+    #endregion
 
 }

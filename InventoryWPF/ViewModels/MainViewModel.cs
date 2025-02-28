@@ -29,46 +29,13 @@ public partial class MainViewModel : ViewModelBase
         PaneWidth = IsPaneOpen ? 200 : 48;
     }
 
-    // Navigate to the home page
+    //Generic method to navigate to a page
     [RelayCommand]
-    private void NavigateHome()
+    private void Navigate(PageType pageType)
     {
-        CurrentPage = _pageFactory.GetViewModel(PageType.Home);
-        ActivePage = PageType.Home;
+        CurrentPage = _pageFactory.GetViewModel(pageType);
+        ActivePage = pageType;
     }
-
-    //Navigate to the job page
-    [RelayCommand]
-    private void NavigateJob()
-    {
-        CurrentPage = _pageFactory.GetViewModel(PageType.Job);
-        ActivePage = PageType.Job;
-    }
-
-    //Navigate to the inventory page
-    [RelayCommand]
-    private void NavigateInventory()
-    {
-        CurrentPage = _pageFactory.GetViewModel(PageType.Inventory);
-        ActivePage = PageType.Inventory;
-    }
-
-    //Navigate to the customers page
-    [RelayCommand]
-    private void NavigateCustomers()
-    {
-        CurrentPage = _pageFactory.GetViewModel(PageType.Customers);
-        ActivePage = PageType.Customers;
-    }
-
-    //Navigate to the venues page
-    [RelayCommand]
-    private void NavigateVenues()
-    {
-        CurrentPage = _pageFactory.GetViewModel(PageType.Venues);
-        ActivePage = PageType.Venues;
-    }
-
 
     /// <summary>
     /// MainWindowViewModel constructor
@@ -78,6 +45,6 @@ public partial class MainViewModel : ViewModelBase
     {
         PageName = PageType.Main;
         _pageFactory = pageFactory;
-        NavigateHome();
+        Navigate(PageType.Inventory);
     }
 }

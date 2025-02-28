@@ -10,14 +10,16 @@
     <Button HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Left"
             Margin="5 10 5 0"
-            Height="38">
+            Height="38"
+            Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
+            CommandParameter="{Binding CommandParameter, RelativeSource={RelativeSource AncestorType=UserControl}}">
         <StackPanel Orientation="Horizontal"
                     Margin="-1 4 0 0">
             <TextBlock FontFamily="{StaticResource SymbolThemeFontFamily}"
-                       Text="{Binding Icon}"
+                       Text="{Binding Icon, RelativeSource={RelativeSource AncestorType=UserControl}}"
                        FontSize="16"
                        HorizontalAlignment="Left" />
-            <TextBlock Text="{Binding Text}"
+            <TextBlock Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
                        Margin="20 0 0 0" />
         </StackPanel>
     </Button>

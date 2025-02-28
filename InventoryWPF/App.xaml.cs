@@ -37,7 +37,11 @@ public partial class App : Application
         });
 
         services.AddTransient<MainViewModel>();
+        services.AddTransient<CustomersViewModel>();
         services.AddTransient<HomeViewModel>();
+        services.AddTransient<InventoryViewModel>();
+        services.AddTransient<JobViewModel>();
+        services.AddTransient<VenuesViewModel>();
 
         //register viewmodelfactory
         services.AddSingleton<Func<PageType, ViewModelBase>>(serviceProvider => pageType =>

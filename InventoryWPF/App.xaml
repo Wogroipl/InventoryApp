@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:InventoryWPF"
              xmlns:vm="clr-namespace:InventoryWPF.ViewModels"
              xmlns:view="clr-namespace:InventoryWPF.Views"
-             ThemeMode="Light">
+             ThemeMode="System">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,6 +14,22 @@
             <!--Set the ViewModel to View mapping-->
             <DataTemplate DataType="{x:Type vm:HomeViewModel}">
                 <view:HomeView />
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vm:CustomersViewModel}">
+                <view:CustomersView />
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vm:InventoryViewModel}">
+                <view:InventoryView />
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vm:JobViewModel}">
+                <view:JobView />
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vm:VenuesViewModel}">
+                <view:VenuesView />
             </DataTemplate>
 
         </ResourceDictionary>
