@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using Repository.Core;
 using Repository.DataAccess;
@@ -15,6 +16,15 @@ public partial class InventoryViewModel : ViewModelBase
     // Collection of products
     [ObservableProperty]
     public ObservableCollection<Product> _products = new();
+
+    #endregion
+
+    #region Commands
+    [RelayCommand]
+    public async Task LoadProducts()
+    {
+        await LoadProductsAsync();
+    }
 
     #endregion
 
@@ -38,9 +48,8 @@ public partial class InventoryViewModel : ViewModelBase
     private async ValueTask LoadProductsAsync()
     {
         var result = await _context.Products.ToListAsync();
-        Products = new ObservableCollection<Product>(result);
+        Products = [.. result];
     }
-
 
     #endregion
 

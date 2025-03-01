@@ -45,6 +45,6 @@ public partial class MainViewModel : ViewModelBase
     {
         PageName = PageType.Main;
         _pageFactory = pageFactory;
-        Navigate(PageType.Inventory);
+        Navigate(PageType.Home);
     }
 }

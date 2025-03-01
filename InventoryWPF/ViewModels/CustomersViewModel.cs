@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using Repository.Core;
 using Repository.DataAccess;
@@ -14,16 +15,23 @@ public partial class CustomersViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<Customer> _customers = new();
 
+    [RelayCommand]
+    public async Task LoadCustomers()
+    {
+        await LoadCustomersAsync();
+    }
+
     public CustomersViewModel(InventoryDbContext context)
     {
         PageName = PageType.Customers;
         _context = context;
-        LoadCustomersAsync();
     }
 
     private async ValueTask LoadCustomersAsync()
     {
         var result = await _context.Customers.ToListAsync();
-        Customers = new ObservableCollection<Customer>(result);
+        Customers = [.. result];
     }
+
+
 }

@@ -45,6 +45,16 @@ public partial class HomeViewModel : ViewModelBase
 
     #endregion
 
+    #region Commands
+
+    [RelayCommand]
+    public async Task LoadJobs()
+    {
+        await LoadJobsAsync();
+    }
+
+    #endregion
+
     #region Constructor
     /// <summary>
     /// Constructor for HomeViewModel.
@@ -54,7 +64,6 @@ public partial class HomeViewModel : ViewModelBase
     {
         PageName = PageType.Home;
         _context = context;
-        LoadJobsAsync();
     }
     #endregion
 
